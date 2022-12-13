@@ -3,7 +3,6 @@
   <PropertyGroup>
     <AssemlyName>CimRegistry.Tests</AssemlyName>
     <IsPackable>false</IsPackable>
-    <NoWarn>NU1701</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
