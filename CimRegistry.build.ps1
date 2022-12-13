@@ -6,10 +6,14 @@ param (
     $Configuration = (property Configuration Release),
 
     [Parameter()]
-    [ValidateSet("net7.0", "netstandard2.0")]
+    [ValidateSet("net462", "net7.0")]
     [string]
-    $Framework = "netstandard2.0"
+    $Framework
 )
+
+if ($Framework.Length -eq 0) {
+    $Framework = if ($PSEdition -eq "Core") { "net7.0" } else { "net462" }
+}
 
 $PSCmdlet.WriteVerbose("Configuration : $Configuration")
 $PSCmdlet.WriteVerbose("Framework     : $Framework")
@@ -28,4 +32,26 @@ task BuildCimRegistry @{
     }
 }
 
-task . BuildCimRegistry
+<#
+.SYNOPSIS
+    Build CimRegistry.Tests assembly
+#>
+task BuildCimRegistryTests @{
+    Inputs  = {
+        Get-ChildItem tests/CimRegistry.Tests/*.cs, tests/CimRegistry.Tests/CimRegistry.Tests.csproj
+    }
+    Outputs = "tests/CimRegistry.Tests/bin/$Configuration/$Framework/CimRegistry.Tests.dll"
+    Jobs    = {
+        exec { dotnet build -c $Configuration -f $Framework tests/CimRegistry.Tests }
+    }
+}
+
+<#
+.SYNOPSIS
+    Run CimRegistry tests
+#>
+task RunCimRegistryTests BuildCimRegistryTests, {
+    exec { dotnet test --no-build -c $Configuration -f $Framework tests/CimRegistry.Tests }
+}
+
+task . RunCimRegistryTests
