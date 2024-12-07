@@ -22,7 +22,7 @@ public class RegistryOperationRequest
         get => _hKey;
         set
         {
-            ThrowHelper.ThrowIfInvalidEnum<RegistryHive>((int)value, nameof(Hive));
+            ThrowHelper.ThrowIfInvalidEnum(value, nameof(Hive));
             _hKey = value;
         }
     }
@@ -42,7 +42,7 @@ public class RegistryOperationRequest
         get => _view;
         set
         {
-            ThrowHelper.ThrowIfInvalidEnum<RegistryView>((int)value, nameof(View));
+            ThrowHelper.ThrowIfInvalidEnum(value, nameof(View));
             _view = value;
         }
     }

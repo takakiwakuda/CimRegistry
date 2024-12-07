@@ -26,7 +26,7 @@ public class RegistryKeyEnumerationResponse : RegistryOperationResponse
 
     public RegistryKeyEnumerationResponse(int returnCode, string[] keys) : base(returnCode)
     {
-        ThrowHelper.ThrowIfNull(keys, nameof(keys));
+        ThrowHelper.ThrowIfNull(keys);
 
         Keys = keys;
     }
@@ -38,7 +38,7 @@ public class RegistryValueEnumerationResponse : RegistryOperationResponse
 
     public RegistryValueEnumerationResponse(int returnCode, RegistryValueInfo[] values) : base(returnCode)
     {
-        ThrowHelper.ThrowIfNull(values, nameof(values));
+        ThrowHelper.ThrowIfNull(values);
 
         Values = values;
     }

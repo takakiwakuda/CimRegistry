@@ -44,7 +44,7 @@ public sealed class CimRegistryProvider : ICimRegistryProvider
     /// <exception cref="ArgumentNullException"><paramref name="session"/> is <see langword="null"/>.</exception>
     public CimRegistryProvider(CimSession session, bool leaveOpen = false)
     {
-        ThrowHelper.ThrowIfNull(session, nameof(session));
+        ThrowHelper.ThrowIfNull(session);
 
         _session = new CimSessionAdapter(session);
         _closable = !leaveOpen;
