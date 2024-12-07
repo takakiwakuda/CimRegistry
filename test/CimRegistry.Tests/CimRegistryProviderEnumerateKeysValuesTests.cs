@@ -5,6 +5,12 @@ namespace CimRegistry.Tests;
 public class CimRegistryProviderEnumerateKeysValuesTests : CimRegistryProviderEnumerateKeysValuesTestBase
 {
     [Fact]
+    public void EnumerateKeys_NullRequest_ThrowsArgumentNullException()
+    {
+        Assert.Throws<ArgumentNullException>("request", () => registryProvider.EnumerateKeys(null));
+    }
+
+    [Fact]
     public void EnumerateKeys_AfterDisposed_ThrowsObjectDisposedException()
     {
         Dispose();

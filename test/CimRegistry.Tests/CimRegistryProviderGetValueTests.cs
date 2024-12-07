@@ -3,6 +3,12 @@ namespace CimRegistry.Tests;
 public class CimRegistryProviderGetValueTests : CimRegistryProviderGetValueTestBase
 {
     [Fact]
+    public void GetDWordValue_NulLRequest_ThrowsArgumentNullException()
+    {
+        Assert.Throws<ArgumentNullException>("request", () => registryProvider.GetDWordValue(null));
+    }
+
+    [Fact]
     public void GetDWordValue_AfterDisposed_ThrowsObjectDisposedException()
     {
         Dispose();

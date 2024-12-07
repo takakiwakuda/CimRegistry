@@ -151,6 +151,7 @@ public sealed class CimRegistryProvider : ICimRegistryProvider
         RegistryGetValueRequest request)
     {
         ThrowIfDisposed();
+        ThrowHelper.ThrowIfNull(request);
 
         using var methodParameters = RegistryMethodParameterBuilder.Create(request);
         using var options = request.GetCimOperationOptions();
@@ -164,6 +165,7 @@ public sealed class CimRegistryProvider : ICimRegistryProvider
     private ICimMethodResult InvokeEnumMethod(string methodName, RegistryOperationRequest request)
     {
         ThrowIfDisposed();
+        ThrowHelper.ThrowIfNull(request);
 
         using var methodParameters = RegistryMethodParameterBuilder.Create(request);
         using var options = request.GetCimOperationOptions();
